@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommender System</title>
+    <style>
+        .item { cursor: pointer; color: blue; text-decoration: underline; }
+        .item:hover { text-decoration: none; }
+    </style>
+</head>
+<body>
+    <h1>Recommender System</h1>
+
+    <h2>Movie Recommendations</h2>
+    <ul>
+        {% for movie in movie_list %}
+            <li class="item" onclick="getRecommendation('movie', '{{ movie }}')">{{ movie }}</li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for movie in movie_recommendations %}
+            <li>{{ movie }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Song Recommendations</h2>
+    <ul>
+        {% for song in song_list %}
+            <li class="item" onclick="getRecommendation('song', '{{ song }}')">{{ song }}</li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for song in song_recommendations %}
+            <li>{{ song }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>News Recommendations</h2>
+    <ul>
+        {% for article in news_list %}
+            <li class="item" onclick="getRecommendation('news', '{{ article }}')">{{ article }}</li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for article in news_recommendations %}
+            <li>{{ article }}</li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        function getRecommendation(type, title) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            const hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = type;
+            hiddenField.value = title;
+            form.appendChild(hiddenField);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+</html>
